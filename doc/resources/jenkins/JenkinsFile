@@ -9,10 +9,10 @@ node {
     }
 
     stage('Publish') {
-        azureFunctionAppPublish appName: env.FUNCTION_NAME, 
-                                azureCredentialsId: env.AZURE_CRED_ID, 
+        azureFunctionAppPublish appName: 'javafndeploy', 
+                                azureCredentialsId: 'azuresp', 
                                 filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*', 
-                                resourceGroup: env.RES_GROUP, 
+                                resourceGroup: 'Jen_rgp', 
                                 sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
     }
 }
