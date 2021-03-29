@@ -14,7 +14,7 @@ node {
             def RESOURCE_GROUP = 'Jen_rgp' 
             def FUNC_NAME = 'javafndeploy'
             // login Azure
-            azureFunctionAppPublish azureCredentialsId: 'azuresp', resourceGroup: $RESOURCE_GROUP, appName: $FUNC_NAME, filePath: '**/*.js,**/*.json'
+            azureFunctionAppPublish azureCredentialsId: 'azuresp', resourceGroup: 'Jen_rgp', appName: 'javafndeploy', filePath: '**/*.js,**/*.json'
             withCredentials([usernamePassword(credentialsId: 'azuresp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
             sh '''
                 az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
