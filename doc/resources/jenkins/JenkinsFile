@@ -15,6 +15,7 @@ node {
             def FUNC_NAME = 'javafndeploy'
             // login Azure
            // azureFunctionAppPublish azureCredentialsId: 'azuresp', resourceGroup: 'Jen_rgp', appName: 'javafndeploy', filePath: '**/*.js,**/*.json'
+           azureFunctionAppPublish appName: env.FUNCTION_NAME,azureCredentialsId: env.AZURE_CRED_ID,filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*',resourceGroup: env.RES_GROUP,sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
             withCredentials([usernamePassword(credentialsId: 'azuresp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
             sh '''
                 az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
@@ -25,7 +26,7 @@ node {
             //sh "az functionapp deployment source config-zip -g $RESOURCE_GROUP -n $FUNC_NAME --src archive.zip"
            // sh 'cd $PWD/target/azure-functions/odd-or-even-function-sample && mvn azure-functions:deploy'
           
-            func azure functionapp publish odd-or-even-function
+           // func azure functionapp publish odd-or-even-function
 
             
             
