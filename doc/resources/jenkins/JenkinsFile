@@ -1,5 +1,7 @@
   
 node {
+ withEnv(['AZURE_SUBSCRIPTION_ID=<subscription_id>',
+        'AZURE_TENANT_ID=<tenant_id>']) {
     stage('Init') {
         checkout scm
     }
@@ -9,10 +11,16 @@ node {
     }
 
     stage('Publish') {
-        azureFunctionAppPublish appName: 'javafndeploy', 
+        
+                                
+        withCredentials([usernamePassword(credentialsId: 'azuresp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+       azureFunctionAppPublish appName: 'javafndeploy', 
                                 azureCredentialsId: 'azuresp', 
                                 filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*', 
                                 resourceGroup: 'Jen_rgp', 
                                 sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
+        
+      }
     }
+   }
 }
