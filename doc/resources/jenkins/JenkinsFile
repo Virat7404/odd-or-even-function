@@ -23,10 +23,10 @@ stages{
 
     stage('Publish') {
      steps{        
-     withCredentials([usernamePassword(azureCredentialsId: '92b70e77-8d7e-42d1-ae8f-1ced08022c04', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+     withCredentials([usernamePassword(credentialsId: 'azuresp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
                            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                            azureFunctionAppPublish appName: 'javafndeploy', 
-                                credentialsId: 'azuresp', 
+                                azureCredentialsId: '92b70e77-8d7e-42d1-ae8f-1ced08022c04', 
                                 filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*', 
                                 resourceGroup: 'Jen_rgp', 
                                 sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
