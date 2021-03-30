@@ -10,7 +10,7 @@ node {
 
     stage('Publish') {
         azureFunctionAppPublish appName: 'javafndeploy', 
-                                azureCredentialsId: 'spazurecredentials', 
+                                azureCredentialsId: 'azuresp', 
                                 filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*', 
                                 resourceGroup: 'Jen_rgp', 
                                 sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
