@@ -1,5 +1,9 @@
   
 node {
+  environment {
+        AZURE_SUBSCRIPTION_ID='92170e15-44be-43ac-b67d-8fd81b05b8f9'
+        AZURE_TENANT_ID='22fca6e7-362a-49c9-b252-691d5c333d98'
+    }
 
     stage('Init') {
         checkout scm
@@ -11,9 +15,11 @@ node {
 
     stage('Publish') {
         
-        withCredentials([azureServicePrincipal('azuresp')]) {
-  sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-}
+     withCredentials([usernamePassword(credentialsId: 'azuresp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+                            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                            sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
+                            sh 'az ...'
+                        }
                                 
    
         
