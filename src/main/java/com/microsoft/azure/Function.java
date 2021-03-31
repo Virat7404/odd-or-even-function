@@ -5,7 +5,7 @@ import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
 
 /**
- * Azure Functions with HTTP Trigger to be implimeneted.
+ * Azure Functions with HTTP Trigger to be .
  */
 public class Function {
     @FunctionName("HttpTrigger-Java")
