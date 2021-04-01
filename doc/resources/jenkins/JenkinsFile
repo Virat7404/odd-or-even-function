@@ -24,7 +24,7 @@ stages{
     stage('Publish') {
      steps{        
    
-                           azureFunctionAppPublish appName: 'ensfn', 
+                           azureFunctionAppPublish appName: 'ensfn1', 
                                 azureCredentialsId: 'spazurecredentials', 
                                 filePath: '**/ens_settings.json,**/*.jar,bin/*,HttpTrigger-Java/*, **/host.json',
                                 resourceGroup: 'Jen_rgp', 
