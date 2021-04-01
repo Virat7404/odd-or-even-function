@@ -28,7 +28,7 @@ stages{
                                 azureCredentialsId: 'spazurecredentials', 
                                 //filePath: 'local.settings.json,**/*.jar,bin/*,HttpTrigger-Java/*',
                                 resourceGroup: 'Jen_rgp', 
-                                //filePath: 'target/azure-functions/odd-or-even-function-sample/*.json,target/azure-functions/odd-or-even-function-sample/*.jar,bin/*,target/azure-functions/odd-or-even-function-sample/HttpTrigger-Java/*',
+                                filePath: 'target/azure-functions/odd-or-even-function-sample/*.json,target/azure-functions/odd-or-even-function-sample/*.jar,bin/*,target/azure-functions/odd-or-even-function-sample/HttpTrigger-Java/*',
                                 //sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
                         
      }
