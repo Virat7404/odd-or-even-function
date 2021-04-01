@@ -26,7 +26,7 @@ stages{
    
                            azureFunctionAppPublish appName: 'ensfn1', 
                                 azureCredentialsId: 'spazurecredentials', 
-                                filePath: '**/ens_settings.json,**/*.jar,bin/*,HttpTrigger-Java/*, **/host.json',
+                                filePath: '**/local.settings.json,**/*.jar,bin/*,HttpTrigger-Java/*, **/*.json',
                                 resourceGroup: 'Jen_rgp', 
                                 sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
                         
