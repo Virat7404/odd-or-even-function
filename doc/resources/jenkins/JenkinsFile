@@ -16,7 +16,7 @@ stages{
     stage('Build') {
       steps{
       script{      
-        sh 'mvn clean package'
+        sh 'cd azure-data-harmonization-cicd/eventhub_raw_data_transfer && mvn clean package'
       }
       }
     }
