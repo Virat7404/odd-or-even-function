@@ -25,6 +25,6 @@ node {
        //  sh 'az logout'
         // }
         
-        azureFunctionAppPublish appName:'samplefunc1', azureCredentialsId: 'mscred',filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*',resourceGroup: 'Jen_rgp',sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
+        azureFunctionAppPublish appName:'plugindeploy', azureCredentialsId: 'mscred',filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*',resourceGroup: 'Jen_rgp',sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
      }
  }
