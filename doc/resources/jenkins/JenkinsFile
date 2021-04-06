@@ -23,7 +23,7 @@ node {
        }
          sh 'cd $PWD/target/azure-functions/odd-or-even-function-sample && zip -r ../../../archive.zip ./* && cd -'
          sh "az functionapp deployment source config-zip -g $RESOURCE_GROUP -n $FUNC_NAME --src archive.zip"
-         az functionapp config appsettings set --name $FUNC_NAME --resource-group $RESOURCE_GROUP --settings "PrimatyEventHubName=evh-primary-dev"
+        sh " az functionapp config appsettings set --name $FUNC_NAME --resource-group $RESOURCE_GROUP --settings "PrimatyEventHubName=evh-primary-dev" "
          sh 'az logout'
         }
         //azureFunctionAppPublish appName:'plugindeploy', azureCredentialsId: 'mscred',filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*,local.settings.json',resourceGroup: 'Jen_rgp',sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
