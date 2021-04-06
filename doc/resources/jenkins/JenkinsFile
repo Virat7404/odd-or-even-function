@@ -13,7 +13,7 @@ node {
      stage('Publish') {
        
         
-        azureFunctionAppPublish appName:'plugindeploy', azureCredentialsId: 'mscred',filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*',resourceGroup: 'Jen_rgp',sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
+        azureFunctionAppPublish appName:'plugindeploy', azureCredentialsId: 'mscred',filePath: '**/*.json,**/*.jar,bin/*,HttpTrigger-Java/*,local.settings.json',resourceGroup: 'Jen_rgp',sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
      }
  }
  }
