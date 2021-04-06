@@ -12,7 +12,7 @@ node {
 
      stage('Publish') {
          def RESOURCE_GROUP = 'Jen_rgp' 
-         def FUNC_NAME = 'ensfn4'
+         def FUNC_NAME = 'samplefunc1'
          // login Azure
          withCredentials([usernamePassword(credentialsId: 'credfunhttpuspp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
          sh '''
