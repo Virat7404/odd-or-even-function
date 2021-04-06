@@ -1,37 +1,28 @@
-pipeline {
-    agent any
-  environment {
-        AZURE_SUBSCRIPTION_ID='92170e15-44be-43ac-b67d-8fd81b05b8f9'
-        AZURE_TENANT_ID='22fca6e7-362a-49c9-b252-691d5c333d98'
-    }
-stages{
-    stage('Init') {
-      steps{
-       script{      
-            checkout scm
-       }
-      }
-    }
-
-    stage('Build') {
-      steps{
-      script{      
-        sh 'cd rawdeploy/azure-data-harmonization-cicd/eventhub_raw_data_transfer && mvn clean package'
-      }
-      }
-    }
-
-    stage('Publish') {
-     steps{        
-   
-                           azureFunctionAppPublish appName: 'ensfn3', 
-                                azureCredentialsId: 'mscred', 
-                                //filePath: 'local.settings.json,**/*.jar,bin/*,HttpTrigger-Java/*',
-                                resourceGroup: 'Jen_rgp', 
-                                filePath: 'target/azure-functions/odd-or-even-function-sample/*.json,target/azure-functions/odd-or-even-function-sample/*.jar,bin/*,target/azure-functions/odd-or-even-function-sample/HttpTrigger-Java/*',
-                                sourceDirectory: 'target/azure-functions/odd-or-even-function-sample'
-                        
+node {
+ withEnv(['AZURE_SUBSCRIPTION_ID=92170e15-44be-43ac-b67d-8fd81b05b8f9',
+         'AZURE_TENANT_ID=22fca6e7-362a-49c9-b252-691d5c333d98']) {
+     stage('Init') {
+         cleanWs()
+         checkout scm
      }
-      }
+
+     stage('Build') {
+         sh 'mvn clean package'
+     }
+
+     stage('Publish') {
+         def RESOURCE_GROUP = '<Jen_rgp>' 
+         def FUNC_NAME = 'ensfn4'
+         // login Azure
+         withCredentials([usernamePassword(credentialsId: 'credfunhttpuspp', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+         sh '''
+             az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+             az account set -s $AZURE_SUBSCRIPTION_ID
+         '''
+         }
+         sh 'cd $PWD/target/azure-functions/odd-or-even-function-sample && zip -r ../../../archive.zip ./* && cd -'
+         sh "az functionapp deployment source config-zip -g $RESOURCE_GROUP -n $FUNC_NAME --src archive.zip"
+         sh 'az logout'
+         }
+     }
  }
-}
